@@ -1,5 +1,4 @@
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
+var server_port = 5000;
 var db_conn_str = 'mongodb://eidosoft_db_admin:notpass@ds055862.mlab.com:55862/eidosoft_db';
 
 var express = require('express');
@@ -29,7 +28,7 @@ app.get('/categories', function(req, res){
 app.get('/product/:id', function(req, res) {
     products.findOne({ 'productId': req.params.id}, function(err, docs) {
         res.send(docs);
-    });    
+    });
 });
 
 app.post('/', function (req, res) {
@@ -38,13 +37,13 @@ app.post('/', function (req, res) {
 app.post('/product', function(req, res) {
     products.insert({ 'productId': req.params.id}, function(err, docs) {
         res.send(docs);
-    });    
+    });
 });
 
 app.get('/category/:id', function(req, res) {
     products.find({ 'category': req.params.id}, function(err, docs) {
         res.send(docs);
-    });    
+    });
 });
 
-app.listen(server_port, server_ip_address);
+app.listen(server_port);
